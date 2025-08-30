@@ -1,47 +1,64 @@
-from typing import Dict
+
+
 
 class User:
     users = []
 
-    def __init__(self, fullname: str, username: str, email: str, password: str) -> Dict:
-        self.fullname = fullname
-        self.username = username
-        self.email = email
-        self.password = password
-        User.users.append(self) # Store the user instance in the class variable
+    def __init__(self, name: str, age: int):
+        self.name = name 
+        self.age = age #Private member
+        User.users.append(self)
 
-    def get_user_information(self) -> Dict:
-        """ This method returns the user information as a dictionary. """
-        return {
-            "fullname": self.fullname,
-            "username": self.username,
-            "email": self.email,
-            "password": self.password
-        }
+    def set_name(self, new_name: str):
+        self.name = new_name
+
+    def get_age(self):
+        return self.age 
     
-    @classmethod
-    def get_users(cls):
-        return [user.get_user_information() for user in cls.users]
+    def greet_user(self): #Instance method.
+        return f"Good afternoon, {self.name}."
+    
+    @classmethod #class method.
+    def total_users(cls):
+        return f"Total number of Users: {len(cls.users)}"
+    
+    @staticmethod
+    def welcome_users():
+        return f"Welcome back!"
 
 
-first_user = User("John Doe", "johndoe", "john@example.com", "securepassword")
-second_user = User("Jane Smith", "janesmith", "jane@example.com", "anothersecurepassword")
-print(first_user.get_user_information())
-print(User.get_users())
+first_user = User("Hope Sain", 23)
+second_user = User("Henry Jamu", 23)
+third_user = User("Benjamin", 24)
+print(first_user.name)
+print(first_user.age)
+first_user.set_name("Radson Kaira")
+print(f"Display age: {first_user.get_age()}")
+print(first_user.name)
+print(first_user.greet_user())
+print(User.total_users())
+print(User.welcome_users())
 
+# All of the above was about Public Members
 
-class Timer:
-    DEFAULT_TIMEOUT = 10 # 
+# The following is about Private Members
+# __ before a member makes it private
 
-    @classmethod
-    def set_default_timeout(cls, timeout: int):
-        cls.DEFAULT_TIMEOUT = timeout
-        return cls.DEFAULT_TIMEOUT
+class BankAccount:
+    def __init__(self, account_number: int):
+        self.account_number = account_number #Public member 
+        self.__balance = 0 #Private member
+        self._pin = 1234 #Protected member
 
+    def deposit(self, amount: int):
+        self.__balance += amount
+        return f"You have deposited '{amount}', your new balance is '{self.__balance}'"
 
-initiate_timer = Timer()
-print(Timer.DEFAULT_TIMEOUT)
-set_timeout = initiate_timer.set_default_timeout(20)
-print(Timer.DEFAULT_TIMEOUT)
-
-
+    def get_balance(self):
+        return self.__balance
+    
+first_account = BankAccount(12345)
+print(first_account._pin)
+print(f"Initial Balance: {first_account.get_balance()}")
+print(first_account.deposit(500))
+print(f"UpdatedBalance: {first_account.get_balance()}")
