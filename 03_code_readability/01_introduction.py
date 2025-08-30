@@ -16,6 +16,7 @@ There are many docstring types but the most common ones are:
     NumPy Style
 But in this course, we will focus on the Google Style.
 """
+from typing import Dict
 
 def example_function(param1: int, param2: str) -> bool:
     """
@@ -30,10 +31,28 @@ def example_function(param1: int, param2: str) -> bool:
 
     Exceptions:
         ValueError: If the parameters are invalid.
-        
+
     Example:
         >>> example_function(1, "test")
         >>> True
     """
     # Function implementation goes here
     return True
+
+print(example_function.__doc__)
+
+def greet(name):
+    """
+    This function greets a person by name.
+    
+    Args:
+        name (str): The name of the person.
+    
+    Returns:
+        str: A greeting message.
+    """
+    return f"Hello, {name}!"
+
+print(greet.__doc__)
+
+help(example_function)
