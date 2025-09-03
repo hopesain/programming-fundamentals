@@ -8,7 +8,6 @@ class Engine(ABC):
 
 class PetrolEngine(Engine):
     def __init__(self, horsepower):
-        super().__init__()
         self.horsepower = horsepower
 
     def start(self):
@@ -16,7 +15,6 @@ class PetrolEngine(Engine):
     
 class DieselEngine(Engine):
     def __init__(self, horsepower):
-        super().__init__()
         self.horsepower = horsepower
 
     def start(self):
@@ -24,7 +22,6 @@ class DieselEngine(Engine):
     
 class ElectricEngine(Engine):
     def __init__(self, horsepower):
-        super().__init__()
         self.horsepower = horsepower
 
     def start(self):
@@ -45,7 +42,7 @@ class AutomaticTransmission(Transmission):
     def shift(self) -> str:
         return "Automatic transmission shifted"
     
-    
+
 class Car:
     def __init__(self, name: str, engine: Engine, transmission: Transmission):
         self.name = name
