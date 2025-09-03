@@ -1,20 +1,27 @@
-class User:
-    def __init__(self, fullname: str, email: str, age: int):
-        self.fullname = fullname
-        self.email = email
-        self.age = age
+class Engine:
+    def __init__(self, engine_type: str, horsepower: int):
+        self.engine_type = engine_type
+        self.horsepower = horsepower
+        self.is_engine_on = False
 
-    def display_user_information(self):
-        return f"Name: {self.fullname}, Email: {self.email}, Age: {self.age}"
+    def start_engine(self):
+        """ This methods starts the engine of the vehicle """
+        self.is_engine_on = True
+        return f"Your {self.engine_type} engine with {self.horsepower} HP is now running."
+    
+    def stop_engine(self):
+        """ This method stops the engine of the vehicle """
+        self.is_engine_on = False
+        return f"Your {self.engine_type} engine with {self.horsepower} HP is now stopped."
+    
 
-class Profile:
-    def __init__(self, user: User, bio: str, location: str):
-        self.user = user
-        self.bio = bio
-        self.location = location
+class Car:
+    def __init__(self, engine: Engine ):
+        self.engine = engine
 
-    def updated_profile_information(self):
-        return f"Bio: {self.bio}, Location: {self.location}, User Info: {self.user.display_user_information()}"
+    def start_car(self):
+        return self.engine.start_engine()
 
-user = Profile(User("John Doe", "john@example.com", 30), "Software Developer", "New York")
-print(user.updated_profile_information())
+
+first_car = Car(Engine("V8", 400))
+print(first_car.start_car())
