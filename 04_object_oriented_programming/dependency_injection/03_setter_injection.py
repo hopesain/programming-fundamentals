@@ -1,6 +1,15 @@
+"""
+Setter injection
+
+The client exposes a setter method that the injector uses to inject the dependency.
+
+In this case, the Car class has a set_engine method that allows the Engine instance to be injected.
+
+"""
+
 class Engine:
-    def start(self):
-        return f"Engine started"
+    def start(self) -> str:
+        return f"Engine started."
     
 class Car:
     def __init__(self):

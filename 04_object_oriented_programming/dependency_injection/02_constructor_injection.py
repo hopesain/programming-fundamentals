@@ -1,3 +1,13 @@
+"""
+Constructor Injection
+
+The dependencies are provided through a class constructor.
+
+In this case, the Car class requires an Engine and a Transmission to be passed in at the time of instantiation.
+
+"""
+
+
 from abc import ABC, abstractmethod
 
 class Engine(ABC):
