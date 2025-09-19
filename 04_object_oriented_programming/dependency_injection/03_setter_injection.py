@@ -1,45 +1,22 @@
-"""
-Setter injection
-
-The client exposes a setter method that the injector uses to inject the dependency.
-
-In this case, the Car class has a set_engine method that allows the Engine instance to be injected.
-
-"""
-
 class Engine:
-    def start(self) -> str:
-        return f"Engine started."
-    
+    def __init__(self, horsepower: int):
+        self.horsepower = horsepower
+
 class Car:
-    def __init__(self):
+    def __init__(self, name: str):
+        self.name = name
         self.engine = None
 
     def set_engine(self, engine: Engine):
         self.engine = engine
-
-    def drive(self):
-        """ 
-        This function implements the drive behaviour in vehicles
-
-        Args:
-            None
-
-        Returns:
-            str: A message indicating the engine has started
-
-        Raises:
-            NotImplementedError: If the engine is not set
-
-        Example:
-            car = Car()
-            car.set_engine(Engine())
-            car.drive()
-        """
-        if self.engine is None:
-            raise NotImplementedError("Engine not set")
-        return self.engine.start()
     
-first_car = Car()
-first_car.set_engine(Engine())
-print(first_car.drive())
+    def start(self):
+        if not self.engine:
+            print(f"{self.name} cannot start without an engine.")
+        print(f"{self.name} with {self.engine.horsepower} HP engine started.")
+
+
+my_car = Car("Toyota")
+print(my_car.engine)
+my_car.set_engine(Engine(400))
+my_car.start()

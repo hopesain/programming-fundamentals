@@ -1,70 +1,57 @@
-"""
-Single Responsibility Principle (SRP)
 
-The Single Responsibility Principle states that a class should have only one reason to change, meaning that a class should only have one job or responsibility.
-
-"""
-
-# SRP Violation
-
-"""
-First example:
-    We have the file manager class that handles multiple responsibilities such as reading, updating, deleting, compressing, and decompressing files.
-"""
-class FileManager:
-    def __init__(self, file_name: str):
-        self.file_name = file_name
-
+class BadFileManager:
+    def __init__(self, filename: str):
+        self.filename = filename
+    
     def read(self):
-        return f"Reading contents from file '{self.file_name}'"
-    
-    def update(self):
-        return f"Updating contents of file '{self.file_name}'"
-    
-    def delete(self):
-        return f"File deleted."
-    
+        print(f"Reading from {self.filename}")
+
+    def save(self, data: str):
+        print(f"Saving data to {self.filename}")
+
     def compress(self):
-        return f"Compressing into a zip file"
-    
+        print(f"Compressing {self.filename}")
+
     def decompress(self):
-        return f"Decompressing the file into a readable doc."
+        print(f"Decompressing {self.filename}")
+
+    def send_via_email(self, email: str):
+        print(f"Sending {self.filename} to {email}")
+
+
+class FileManager:
+    def __init__(self, filename: str):
+        self.filename = filename
     
-"""
-Reviews about the above example.
-The above class has multiple responsibilities.
-This is not a good design as the class has multiple reasons to change.
-The first group of methods (read, update, delete) are related to file operations, while the second group of methods (compress, decompress) are related to file compression.
-Let's split it into two classes:
-    1. FileHandler - To handle file operations (read, update, delete)
-    2. FileCompressor - To handle file compression task (compress, decompress)
-"""
+    def read(self):
+        print(f"Reading from {self.filename}")
 
-class FileHandler:
-    def __init__(self, file_name: str):
-        self.file_name = file_name
-
-    def read(self) -> str:
-        pass
-
-    def update(self) -> str:
-        pass
-
-    def delete(self) -> str:
-        pass
-
+    def save(self, data: str):
+        print(f"Saving data to {self.filename}")
 
 class FileCompressor:
-    def __init__(self, file_name: str):
-        self.file_name = file_name
+    def compress(self, filename: str):
+        print(f"Compressing {filename}")
 
-    def compress(self) -> str:
-        pass
+    def decompress(self, filename: str):
+        print(f"Decompressing {filename}")
 
-    def decompress(self) -> str: 
-        pass
-    
-"""
-The second example.
-The Report class.
-"""
+
+class User:
+    def __init__(self, name):
+        self.name = name
+
+    def login(self, password):
+        print(f"User {self.name} logged in")
+
+    def save_preferences(self, preferences):
+        print(f"Saving preferences for {self.name}")
+
+
+class Authenticator:
+    def login(self, user: User, password: str):
+        
+        print(f"User {user.name} logged in")
+
+    def logout(self, user: User):
+        print(f"User {user.name} logged out")
