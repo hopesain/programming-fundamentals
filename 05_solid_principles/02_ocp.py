@@ -1,5 +1,11 @@
 from abc import ABC, abstractmethod
 
+
+"""
+In the early days of mobile phone security, we could unlock our phones using a password.
+As technology advanced, we introduced new unlocking methods such as patterns and fingerprints.
+"""
+
 STORED_PASSWORD = "1234"
 STORED_PATTERN = "L"
 STORED_FINGERPRINT = "F"
